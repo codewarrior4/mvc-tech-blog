@@ -33,6 +33,10 @@
     margin: 0;
     padding: 0;
   }
+
+  .card{
+    border-radius: 10px !important;
+  }
   
   textarea, input {
     padding: .5%;
@@ -132,7 +136,7 @@
   }
   
   .comment:nth-child(odd) {
-    background-color: #fff5eb;
+    background-color: #0a70b4;
   }
   
   .comment .meta {

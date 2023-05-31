@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const sequelize = require('../../config/connection');
-const withAuth = require('../../utils/auth');
+const ensureAuth = require('../../utils/auth');
 
 // get all users
 router.get('/', (req, res) => {
-    console.log('======================');
     Post.findAll({
         attributes: [
             'id',
@@ -21,12 +20,12 @@ router.get('/', (req, res) => {
           attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
           include: {
             model: User,
-            attributes: ['username', 'twitter', 'github']
+            attributes: ['username']
           }
         },
         {
           model: User,
-          attributes: ['username', 'twitter', 'github']
+          attributes: ['username']
         },
       ]
     })
@@ -52,14 +51,14 @@ router.get('/', (req, res) => {
         // include the Comment model here:
         {
           model: User,
-          attributes: ['username', 'twitter', 'github']
+          attributes: ['username']
         },
         {
           model: Comment,
           attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
           include: {
             model: User,
-            attributes: ['username', 'twitter', 'github']
+            attributes: ['username']
           }
         }
       ]
@@ -77,7 +76,7 @@ router.get('/', (req, res) => {
       });
   });
 
-router.post('/', withAuth, (req, res) => {
+router.post('/', ensureAuth, (req, res) => {
     Post.create({
       title: req.body.title,
       post_content: req.body.post_content,
@@ -90,7 +89,7 @@ router.post('/', withAuth, (req, res) => {
       });
 });
 
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', ensureAuth, (req, res) => {
     Post.update({
         title: req.body.title,
         post_content: req.body.post_content
@@ -113,7 +112,7 @@ router.put('/:id', withAuth, (req, res) => {
       });
   });
 
-  router.delete('/:id', withAuth, (req, res) => {
+  router.delete('/:id', ensureAuth, (req, res) => {
     Post.destroy({
       where: {
         id: req.params.id

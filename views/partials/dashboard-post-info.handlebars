@@ -15,7 +15,10 @@
         <div class="content has-text-justified">
             {{post_content}}
         </div>
-        
+        {{!-- edit post--}}
+        <div class="is-pulled-left">
+            <a href="/dashboard/edit/{{id}}" class="has-text-info"> <i class="fa fa-pen"></i> Edit post</a>
+        </div>
         <div class="is-pulled-right">
             <b><i class="fa fa-user"></i> {{user.username}}</b>
                 | {{format_date created_at}} | <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>

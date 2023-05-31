@@ -6,11 +6,11 @@
 {{#if loggedIn}}
 <form class="comment-form">
   <div>
-    <textarea class="ml-5" name="comment-body"></textarea>
+    <textarea class="ml-5 textarea is-info" name="comment-body"></textarea>
   </div>
 
   <div>
-    <button class="button is-warning ml-5 mb-5" type="submit">add comment</button>
+    <button class="button is-info ml-5 mb-5" type="submit">Add comment</button>
   </div>
   
 </form>
@@ -18,6 +18,3 @@
 
 {{> comments post.comments}}
 
-{{#if loggedIn}}
-<script src="/javascript/comment.js"></script>
-{{/if}}
